@@ -18,9 +18,10 @@ def send_mail(close_rate, comment):
 
     # Send the mail
     msg = ("Hello!\n\n" +
-           'Look at that ' + str(close_rate) + '! ' + comment
+           'Look at that SGD-EUR rate: ' + str(close_rate) + '! ' + comment
            + '\n\nBest regards,'
-           + '\nMarc')
+           + '\nMarc'
+           + '\n\n\n\n\n\n\n\nDisclaimer - email automatically generated if the SGD-EUR rate is above 0.64')
     msg = "\r\n".join([
         "From: " + EMAIL,
         "To: " + 'marcletourneur@hotmail.fr',
@@ -30,12 +31,13 @@ def send_mail(close_rate, comment):
     ])
 
     server.sendmail(EMAIL, 'marcletourneur@hotmail.fr', msg)
+    server.sendmail(EMAIL, 'auguste.byiringiro@laposte.net', msg)
     server.quit()
 
 
 def routine():
     url = 'https://www.xe.com/currencycharts/?from=SGD&to=EUR&view=1Y'
-    driver = webdriver.Chrome('/Users/Marc/bin/chromedriver')
+    driver = webdriver.Chrome('/Users/Caco/bin/chromedriver')
     driver.get(url)
     html_source = driver.page_source
     driver.quit()
@@ -51,13 +53,12 @@ def routine():
         send_mail(close_rate, "Go for it.")
         print "Bingo"
     else:
-        send_mail(close_rate, "Wait a bit...")
+        # send_mail(close_rate, "Wait a bit...")
         print "Wait a bit..."
 
 schedule.every().day.at("8:30").do(routine)
-schedule.every().day.at("10:09").do(routine)
-
 schedule.every().day.at("17:30").do(routine)
+# schedule.every().day.at("20:17").do(routine)
 
 while True:
     schedule.run_pending()
