@@ -31,7 +31,6 @@ def send_mail(close_rate, comment):
     ])
 
     server.sendmail(EMAIL, 'marcletourneur@hotmail.fr', msg)
-    server.sendmail(EMAIL, 'auguste.byiringiro@laposte.net', msg)
     server.quit()
 
 
@@ -58,7 +57,6 @@ def routine():
 
 schedule.every().day.at("8:30").do(routine)
 schedule.every().day.at("17:30").do(routine)
-# schedule.every().day.at("20:17").do(routine)
 
 while True:
     schedule.run_pending()
