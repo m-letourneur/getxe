@@ -1,4 +1,10 @@
-# README
+# GETXE
+
+A basic tool to scrap the exchange rate of currencies on a daily basis.
+If the exchange rate verifies a condition, an email is sent to the specified email addresses.
+Automator® on OS X allows to launch the script in the background when the user logs in.  
+
+> BeautifulSoup + schedule + smtplib
 
 ## Config file
 Write a config.py in the root directory that contains:
